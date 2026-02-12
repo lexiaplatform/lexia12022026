@@ -1,25 +1,12 @@
 {
-  "name": "lexia-platform-frontend",
-  "private": true,
-  "version": "0.0.0",
+  "name": "gemini-server",
+  "version": "1.0.0",
   "type": "module",
+  "main": "server.js",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "start": "node server.js"
   },
   "dependencies": {
-    "react": "latest",
-    "react-dom": "latest",
-    "react-router-dom": "latest",
-    "lucide-react": "latest",
-    "recharts": "latest",
-    "@google/genai": "latest"
-  },
-  "devDependencies": {
-    "@types/node": "latest",
-    "@vitejs/plugin-react": "latest",
-    "typescript": "latest",
-    "vite": "latest"
+    "express": "^4.18.2"
   }
 }
