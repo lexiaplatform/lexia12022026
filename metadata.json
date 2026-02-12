@@ -1,0 +1,8 @@
+{
+  "name": "Lexia Platform",
+  "description": "A comprehensive fleet management and investment platform for the mobility sector (LΣΧΙΛ), featuring AI-driven support (LIA) and specialized dashboards for Drivers, Owners, and Investors. Built with an 'Institutional Dark Finance' aesthetic.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
