@@ -1,10 +1,37 @@
-const PORT = process.env.PORT || 5000;
-const API_BACKEND_HOST = "0.0.0.0";
+import express from "express";
 
-const GOOGLE_CLOUD_LOCATION = process.env.GOOGLE_CLOUD_LOCATION;
-const GOOGLE_CLOUD_PROJECT = process.env.GOOGLE_CLOUD_PROJECT;
+const app = express();
+app.use(express.json());
 
-if (!GOOGLE_CLOUD_PROJECT || !GOOGLE_CLOUD_LOCATION) {
-  console.error("Missing GOOGLE_CLOUD_PROJECT or GOOGLE_CLOUD_LOCATION");
-  process.exit(1);
-} 
+app.get("/", (req, res) => {
+  res.send("Servidor rodando 🚀");
+});
+
+app.post("/chat", async (req, res) => {
+  try {
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [
+            { parts: [{ text: req.body.message }] }
+          ]
+        })
+      }
+    );
+
+    const data = await response.json();
+    const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+
+    res.json({ reply: text });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log("Server running on", PORT);
+});
